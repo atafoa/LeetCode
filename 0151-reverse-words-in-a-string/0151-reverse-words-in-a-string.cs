@@ -27,7 +27,7 @@ public class Solution
         while(TryFindStartOfWorld(rightCursor , s , out rightCursor))
         {
             // gives index of last letter in the current word
-            leftCursor = IndexEndOfWord(rightCursor , s);
+            leftCursor = IndexOfWordEnd(rightCursor , s);
 
             sb.Append(s , leftCursor , (rightCursor - leftCursor) + 1 );
 
