@@ -1,27 +1,20 @@
 public class Solution {
-    public int LongestCommonSubsequence(string text1, string text2) {
-       int n = text1.Length;
-        int m = text2.Length;
-        int [,] dp = new int[n+1,m+1];
-        for(int i = 0;i<n+1;i++)
+    public int LongestCommonSubsequence(string s1, string s2) {
+       int[,] dp = new int[2, s2.Length + 1];
+        for (int i = 1; i <= s1.Length; i++)
         {
-            for(int j = 0; j< m+1 ;j++)
+            for (int j = 1; j <= s2.Length; j++)
             {
-                if(i == 0 || j == 0)
+                if (s1[i - 1] == s2[j - 1])
                 {
-                    dp[i,j] = 0;
+                    dp[i%2, j] = dp[(i - 1)%2, j - 1] + 1;
                 }
-
-                else if(text1[i-1] == text2[j-1])
+                else
                 {
-                   dp[i,j] = 1+dp[i-1,j-1];
-                }else
-                {
-                    dp[i,j] = Math.Max(dp[i-1,j],dp[i,j-1]);
+                    dp[i%2, j] = Math.Max(dp[(i-1)%2, j], dp[i%2, j - 1]);
                 }
             }
         }
-
-        return dp[n,m];
+        return Math.Max(dp[1, s2.Length],dp[0, s2.Length]);
     }
 }
