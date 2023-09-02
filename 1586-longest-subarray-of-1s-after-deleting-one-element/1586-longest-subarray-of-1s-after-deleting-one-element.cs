@@ -1,7 +1,7 @@
 public class Solution {
     public int LongestSubarray(int[] nums) {
         /*
-        We always move forward with pointer R whenever nums[R] points to zero we will increment our counter of maxZero by 1. As a next step we check if we have more than 1 zeros in our subarray then we need to shrik our window from using L pinter. Make sure to decrement maxZero if the nums[L] poining to 0. This will eliminate the 0 from our subarray.
+        We always move forward with pointer R whenever nums[R] points to zero we will increment our counter of maxZero by 1. As a next step we check if we have more than 1 zeros in our subarray then we need to shrink our window from using L pinter. Make sure to decrement maxZero if the nums[L] poining to 0. This will eliminate the 0 from our subarray.
 
 For every step check if maxZero in current subarray is less than 1 update maxLen of subarray.
         */
