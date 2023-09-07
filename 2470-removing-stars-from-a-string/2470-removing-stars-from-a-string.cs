@@ -11,13 +11,13 @@ public class Solution {
         reverse the string
         */
 
-        Stack st = new Stack();
+        Stack<char> st = new Stack<char>();
 
         for ( int i = 0; i < s.Length; i++)
         {
-            if(s[i].Equals('*'))
+            if(s[i] == '*')
             {
-                st.Pop();
+                st.TryPop(out var c); //if string starts with * we'd be popping an empty stack
             }
             else
             {
@@ -25,20 +25,6 @@ public class Solution {
             }
         }
 
-        string answer = "";
-        while(st.Count > 0)
-        {
-            answer += st.Peek();
-            st.Pop();
-        }
-
-        return Reverse(answer);
-    }
-
-    public static string Reverse( string s )
-    {
-        char[] charArray = s.ToCharArray();
-        Array.Reverse(charArray);
-        return new string(charArray);
+        return string.Concat(st.Reverse()); //reverse stack and add to string
     }
 }
