@@ -16,64 +16,68 @@ public class Solution {
         Return the party which has at least one eligible senator
         */
 
-        // Number of Senators of each party
-        int rCount = 0, dCount = 0;
+        var radiants = 0;
+        var dires = 0;
 
-        //Floating Ban Count
-        int dFloatingBan = 0, rFloatingBan = 0;
+        var direVotes = 0; 
+        var radiantVotes = 0;
 
-        //Queue of Senators
-        Queue<char> q = new Queue<char>();
-        foreach( char c in senate)
+        //Filling the queue and count party members
+        var senators = new Queue<char>();
+        foreach (var senator in senate) 
         {
-            q.Enqueue(c);
-            if ( c == 'R')
+            senators.Enqueue(senator);
+            if (senator == 'R') 
             {
-                rCount++;
+                radiants++;
             }
             else
             {
-                dCount++;
-            }
+                dires++;
+            } 
         }
 
-        //While any party has eligible senators
-        while (rCount > 0 && dCount > 0)
+        //Until on party is victorious we keep iterating
+        while (radiants > 0 && dires > 0) 
         {
-            char curr = q.Dequeue();
+            var isDire = senators.Peek() == 'D';
 
-            // If eligible, float the ban on the other party, enqueue again.
-            // If not, decrement the floating ban and count of the party.
-            if (curr == 'D') 
+            if (isDire) 
             {
-                if (dFloatingBan > 0) 
+                //Check if senator is banned
+                if (radiantVotes > 0) 
                 {
-                    dFloatingBan--;
-                    dCount--;
+                    radiantVotes--;
+                    senators.Dequeue();
+                    dires--;
                 } 
+                //If senator wasnt banned senator can ban someone else
                 else 
                 {
-                    rFloatingBan++;
-                    q.Enqueue('D');
+                    direVotes++;
+                    senators.Enqueue(senators.Dequeue());
                 }
             } 
             else 
             {
-                if (rFloatingBan > 0) 
+                //Check if senator is banned
+                if (direVotes > 0) 
                 {
-                    rFloatingBan--;
-                    rCount--;
+                    direVotes--;
+                    senators.Dequeue();
+                    radiants--;
                 } 
+                //If senator wasnt banned senator can ban someone else
                 else 
                 {
-                    dFloatingBan++;
-                    q.Enqueue('R');
+                    radiantVotes++;
+                    senators.Enqueue(senators.Dequeue());
                 }
             }
         }
 
-        //Return the party with eligible senators
-        return rCount > 0 ? "Radiant" : "Dire";
+        //When there is a victor we announce it
+        return radiants > 0 ? "Radiant" : "Dire";
 
     }
 }
