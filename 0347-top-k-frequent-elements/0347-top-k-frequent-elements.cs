@@ -1,6 +1,7 @@
 public class Solution {
     public int[] TopKFrequent(int[] nums, int k) {
         // Bucket sort
+        // O(n) tc and sc
 
         // Step 1: Build the frequency map of elements in the nums array
         Dictionary<int, int> freqMap = new Dictionary<int, int>();
