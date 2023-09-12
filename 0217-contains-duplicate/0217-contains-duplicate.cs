@@ -1,32 +1,11 @@
 public class Solution {
     public bool ContainsDuplicate(int[] nums) {
-        //Approach
-        // iterate through the array storing the frequency of each element in a map
-        // if freqency of any element is more than one return true
-        // else false
+        // simpler approach
+        // use a hashset to store elements since hash set has to be unique
+        // if array length is not equal set length then we know theres a dup
 
-        Dictionary<int,int> map = new Dictionary<int,int>();
-        foreach(int num in nums)
-        {
-            if(map.ContainsKey(num))
-            {
-                map[num]++;
-            }
-            else
-            {
-                map.Add(num,1);
-            }
+        HashSet<int> set = new HashSet<int>(nums);
 
-        }
-
-        foreach(var key in map)
-        {
-            if(key.Value > 1)
-            {
-                return true;
-            }
-        }
-
-        return false;
+        return nums.Length != set.Count;
     }
 }
