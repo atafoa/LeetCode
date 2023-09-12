@@ -7,36 +7,33 @@ public class Solution {
         // if every element in the dictionary has a frequency of 0 return true
         // else false
 
-        // alternate approach
-        // sort strings and compare
-
         if(s.Length != t.Length)
         {
             return false;
         }
 
-        var dict = new Dictionary<char, int>();
-        foreach(char c in s.ToCharArray())
+        var map = new Dictionary<char, int>();
+        for (int i = 0; i < s.Length; i++)
         {
-            if(!dict.ContainsKey(c))
+            char c = s[i];
+            if (map.ContainsKey(c))
             {
-                dict.Add(c,0);
+                map[c]++;
+            }
+            else {
+                map.Add(c,1);
+            }
+
+            if (map.ContainsKey(t[i]))
+            {
+                map[t[i]]--;
             }
             else
-                dict[c]++;
-        }
-
-        foreach(char c in t.ToCharArray())
-        {
-            if(!dict.ContainsKey(c) || dict[c] < 0)
-                return false;
-            else
             {
-                dict[c]--;
+                map.Add(t[i], -1);
             }
         }
-
-        return true;
+        return !map.Any(x => x.Value != 0); // if all values are 0 return true
 
     }
 }
