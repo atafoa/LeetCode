@@ -14,25 +14,22 @@ public class Solution {
        var dummyNode = new ListNode();
        var tail = dummyNode;
 
-       var pointer1 = list1;
-       var pointer2 = list2;
-
-       while (pointer1 != null & pointer2 != null)
+       while (list1 != null & list2 != null)
        {
-           if (pointer1.val < pointer2.val)
+           if (list1.val < list2.val)
            {
-               tail.next = pointer1;
-               pointer1 = pointer1.next;
+               tail.next = list1;
+               list1 = list1.next;
            }
            else
            {
-               tail.next = pointer2;
-               pointer2 = pointer2.next;
+               tail.next = list2;
+               list2 = list2.next;
            }
            tail = tail.next;
        }
 
-       tail.next = pointer1 ?? pointer2;
+       tail.next = list1 ?? list2; // find non empty list and insert in rest of list only one non null
        
        return dummyNode.next;
     }
